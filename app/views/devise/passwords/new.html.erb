@@ -1,0 +1,29 @@
+ <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="d-flex align-items-center">
+    <div class="col-md-6 order-md-2">
+      <img src="https://preview.colorlib.com/theme/bootstrap/login-form-08/images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+    </div>
+    <div class="col-md-6 contents">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="mb-4">
+          <h3>Recuperar senha <strong>CoreMedia</strong></h3>
+          <p class="mb-4">Informe o email para enviarmos os passos para recuperar sua senha.</p>
+        </div>
+        <form action="#" method="post">
+          <div class="form-group first">
+            <label>E-mail</label>
+            <%= f.email_field :email,class:"form-control", autofocus: true, autocomplete: "email" %>
+          </div>
+          <%= render "devise/shared/links" %>
+          <%= f.submit "Recuperar Senha",class:"btn text-white btn-block btn-primary" %>
+        </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+<% end %>
