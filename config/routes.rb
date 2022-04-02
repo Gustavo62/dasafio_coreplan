@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get '/notificacao',            to: 'home#notificacao'
   get '/visualizar',             to: 'home#visualizar'
   get '/visualizar/notificacao', to: 'home#visualizar_notificacao'
+  get '/visualizar/notificacao/like', to: 'home#dar_like_post_visualizacao'
   get '/post/like/pessoal',      to: 'posts#dar_like_post'
 end

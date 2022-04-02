@@ -1,0 +1,51 @@
+<% @user.each do | user | %>
+    <div class="col-md-12 grid-margin" id="user_<%=user.id%>">
+        <div class="card rounded">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div style="width:50px">
+                        <%= image_tag user.try(:avatar),class:"img-xs rounded-circle"%>
+                        </div>
+                        <div class="ml-2">
+                            <p><%= user.nome %></p>
+                            <p class="tx-11 text-muted">Criado em <%= user.created_at.strftime("%d/%m/%Y às %h:%m")%></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="mb-3 tx-14 text-break">
+                    Contato: <%= user.email %><br>
+                    Linkedin: <a href="<%= user.link_linkedin %>" target="blank"><%= user.link_linkedin %></a><br>
+                    Bio: <%= user.bio %>
+                </p>
+            </div>
+        </div>
+    </div>
+<% end %>
+<% @posts.each do | post | %>
+    <div class="col-md-12 grid-margin" id="post_<%=post.id%>">
+        <div class="card rounded">
+            <div class="card-body">
+                <p class="mb-3 tx-14 text-break"><%= post.post_msg %>.</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="d-flex post-actions">
+                        <% if @LikePost.where(post_id: post.id,user_id: @user.take.id).size != 0%>
+                            <%= link_to visualizar_notificacao_like_path(post_id: post.id,user_id: @user.take.id) do %>
+                                <i class="fa-solid fa-thumbs-up icons_interact liked"><span class="badge bg-secondary" style="position: absolute;font-size: 8px;"><%= @LikePost.where(post_id: post.id).size%></span></i>
+                            <% end %>
+                        <% else %>
+                            <%= link_to visualizar_notificacao_like_path(post_id: post.id,user_id: @user.take.id) do %>
+                                <i class="fa-solid fa-thumbs-up icons_interact like"><span class="badge bg-secondary" style="position: absolute;font-size: 8px;"><%= @LikePost.where(post_id: post.id).size%></span></i>
+                            <% end %>
+                        <% end %>
+                        <a href="https://api.whatsapp.com/send?text=Olha esse post do CoreMedia: <%= post.post_msg %>"><i class="fa-solid fa-share-nodes icons_interact share"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
