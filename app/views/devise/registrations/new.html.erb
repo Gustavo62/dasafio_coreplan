@@ -13,13 +13,18 @@
             <p class="mb-4">Informe seu email e uma senha.</p>
           </div>
           <form action="#" method="post">
+
             <div class="form-group first">
-              <label>E-mail</label>
-              <%= f.email_field :email,class:"form-control", autofocus: true, autocomplete: "email" %>
+              <label>Avatar</label>
+              <%= f.file_field  :avatar,class:"form-control" %>
             </div>
             <div class="form-group first">
               <label>Nome</label>
               <%= f.text_field :nome,class:"form-control", required: true %>
+            </div>
+            <div class="form-group first">
+              <label>E-mail</label>
+              <%= f.email_field :email,class:"form-control", autofocus: true, autocomplete: "email" %>
             </div>
             <div class="form-group first">
               <label>Biografia</label>
@@ -41,7 +46,9 @@
               <label>Confirmar Senha</label>
               <%= f.password_field :password_confirmation, autocomplete: "current-password",class:"form-control",id:"password"%>
             </div>
-            <%= render "devise/shared/links" %>
+            <div class="d-flex justify-content-between mb-5 align-items-center  ">
+              <%= render "devise/shared/links" %>
+            </div>
             <%= f.submit "Cadastrar-se",class:"btn text-white btn-block btn-primary" %>
           </form>
           </div>

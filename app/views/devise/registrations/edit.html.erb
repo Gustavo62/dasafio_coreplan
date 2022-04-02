@@ -1,43 +1,64 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
+  <div class="mx-auto p-3">
+    <div class="d-flex align-items-center ">
+      <div class="col-md-6 order-md-2">
+        <img src="https://preview.colorlib.com/theme/bootstrap/login-form-08/images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-md-6 contents">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="mb-4">
+            <h3>Cadastrar-se <strong>CoreMedia</strong></h3>
+            <p class="mb-4">Informe seu email e uma senha.</p>
+          </div>
+          <form action="#" method="post">
+            <div class="form-group first">
+              <label>Avatar</label>
+              <%= f.file_field  :avatar,class:"form-control" %>
+            </div>
+            <div class="form-group ">
+              <label>E-mail</label>
+              <%= f.email_field :email,class:"form-control", autofocus: true, autocomplete: "email" %>
+            </div>
+            <div class="form-group ">
+              <label>Nome</label>
+              <%= f.text_field :nome,class:"form-control", required: true %>
+            </div>
+            <div class="form-group ">
+              <label>Biografia</label>
+              <%= f.text_area :bio,class:"form-control", required: true,maxlength:"255" %>
+              <em>255 caracteres no máximo.</em>
+            </div>
+            <div class="form-group ">
+              <label>Linkedin</label>
+              <%= f.text_field :link_linkedin,class:"form-control", required: true %>
+            </div>
+            <div class="form-group last mb-4">
+              <label>Senha</label>
+              <%= f.password_field :password, autocomplete: "current-password",class:"form-control",id:"password"%>
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+            </div>
+            <div class="form-group last mb-4">
+              <label>Confirmar Senha</label>
+              <%= f.password_field :password_confirmation, autocomplete: "current-password",class:"form-control",id:"password"%>
+            </div>
+            <div class="form-group last mb-4">
+              <label>Senha Atual <i>(Você precisa informar a senha atual para salvar as modificações)</i></label>
+              <%= f.password_field :current_password, autocomplete: "current-password",class:"form-control",id:"password"%>
+            </div>
+            <div class="d-flex justify-content-between mb-5 align-items-center  ">
+              <%= link_to "Voltar", :back %>
+              <%= render "devise/shared/links" %>
+            </div>
+            <%= f.submit "Salvar",class:"btn text-white btn-block btn-primary" %>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
