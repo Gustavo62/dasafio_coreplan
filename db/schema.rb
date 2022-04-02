@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_032507) do
   create_table "coments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
+    t.string "coment_msg", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_coments_on_post_id"
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_032507) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
+    t.string "post_msg", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"

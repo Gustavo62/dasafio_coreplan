@@ -8,19 +8,67 @@
                     </div>
                 </div>
             </div>
-            <form>
+            <%= form_with(url:  posts_path, method: "post") do |f| %>
                 <div class="card-body">
                     <div class="form-group">
                         <label>Mensagem</label>
-                        <textarea class="form-control" placeholder="Coloque aqui sua mensagem" style="height: 100px;padding: 0px 8px 65px;">
-                        </textarea>
+                        <%= f.number_field 'post[user_id]', type:"hidden",value:"#{current_user.id}"%>
+                        <%= f.text_area 'post[post_msg]',required: true , class:"form-control", placeholder:"Coloque aqui sua mensagem", style:"height: 100px;padding: 0px 8px 65px;"%>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <%= link_to "Postar", user_session, class:"btn btn-primary",style:"float:left"%>
+                    <%= f.submit "Postar", class:"btn btn-primary",style:"float:right" %>
                 </div>
-            </form>
+            <% end %>
             <br>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <% @posts.each do | post | %>
+        <div class="col-md-12 grid-margin" id="post_<%=post.id%>">
+            <div class="card rounded">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div style="width:50px">
+                            <%= image_tag @users.find(post.user_id).try(:avatar),class:"img-xs rounded-circle"%>
+                            </div>
+                            <div class="ml-2">
+                                <p><%= @users.find(post.user_id).try(:nome) %></p>
+                                <p class="tx-11 text-muted"><%= post.created_at.strftime("%d/%m/%Y %h:%m")%></p>
+                            </div>
+                        </div>
+                        <div class="dropdown dropstart text-end">
+                            <% if post.user_id == current_user.id%>
+                                <%= link_to post_path(post), method: :delete,class:"dropdown-item" do %>
+                                    <i class="fa-solid fa-trash-can" style="color:#ff0000"></i>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3 tx-14 text-break"><%= post.post_msg %>.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="d-flex post-actions">
+                            <% if @LikePost.where(post_id: post.id,user_id: current_user.id).size != 0%>
+                                <%= link_to post_like_path(post_id: post.id,user_id: current_user.id) do %>
+                                    <i class="fa-solid fa-thumbs-up icons_interact liked"><span class="badge bg-secondary" style="position: absolute;font-size: 8px;"><%= @LikePost.where(post_id: post.id).size%></span></i>
+                                <% end %>
+                            <% else %>
+                                <%= link_to post_like_path(post_id: post.id,user_id: current_user.id) do %>
+                                    <i class="fa-solid fa-thumbs-up icons_interact like"><span class="badge bg-secondary" style="position: absolute;font-size: 8px;"><%= @LikePost.where(post_id: post.id).size%></span></i>
+                                <% end %>
+                            <% end %>
+                            <a href="https://api.whatsapp.com/send?text=Olha esse post do CoreMedia: <%= post.post_msg %>"><i class="fa-solid fa-share-nodes icons_interact share"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
