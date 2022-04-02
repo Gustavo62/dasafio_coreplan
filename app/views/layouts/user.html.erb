@@ -36,13 +36,29 @@
                             <div class="header-links">
                                 <ul class="nav justify-content-center links d-flex align-items-center mt-3 mt-md-0">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Postagens</a>
+                                        <%= link_to "Postagens", root_path,class:"nav-link active" %>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Curtidas</a>
+                                        <%= link_to "Minhas Postagens", posts_path(user_id: current_user),class:"nav-link active" %>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Amigos</a>
+                                        <%= link_to "Curtidas", post_curtidos_path,class:"nav-link active" %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to usuarios_path,class:"nav-link active position-relative" do  %>
+                                            Amigos
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                <%= @seguidor.where(seguidor: current_user.id).size%>
+                                            </span>
+                                        <% end %>
+                                    </li>
+                                    <li class="nav-item">
+                                        <%= link_to notificacao_path,class:"nav-link active position-relative" do  %>
+                                            Notificações
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                <%= @seguidor.where(seguido: current_user.id,visualizado: false).size%>
+                                            </span>
+                                        <% end %>
                                     </li>
                                 </ul>
                             </div>
@@ -50,7 +66,6 @@
                     </div>
                 </div>
                 <div class="row profile-body">
-                    <!-- left wrapper start -->
                     <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
                         <div class="card rounded">
                             <div class="card-body">

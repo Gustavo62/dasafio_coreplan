@@ -1,15 +1,27 @@
 class PostsController < ApplicationController
+  layout 'user'
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.where(user_id: params[:user_id])
+    @user  = User.all.find(params[:user_id])
+    @LikePost   = LikePost.all
+    @seguidor = Seguidor.all
   end
 
   # GET /posts/1 or /posts/1.json
   def show
   end
-
+  def dar_like_post
+    @liked = LikePost.where(user_id: params[:user_id],post_id: params[:post_id])
+    if @liked.size != 0
+      LikePost.where(user_id: params[:user_id],post_id: params[:post_id]).take.delete
+    else
+      LikePost.create(user_id: params[:user_id],post_id: params[:post_id])
+    end
+    redirect_to posts_path(user_id: params[:user_id])
+  end
   # GET /posts/new
   def new
     @post = Post.new
@@ -47,10 +59,10 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+    if params[:control] == 'inside'
+      redirect_to posts_path(user_id: params[:user_id])
+    else
+      redirect_to root_path
     end
   end
 

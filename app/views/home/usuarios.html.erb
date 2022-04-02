@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <%= form_with(url:  usuarios_path, method: "get") do |f| %>
+            <div class="d-flex align-items-center">
+                <%= f.text_field :nome,required: true , class:"form-control", placeholder:"Nome do usuário", style:"margin-right:10px",value:params[:nome]%>
+                <%= f.submit "Postar", class:"btn btn-primary",style:"float:right" %>
+                <%= link_to "Limpar", usuarios_path,class:"btn btn-secundary"%>
+            </div>
+        <% end %>
+    </div>
+    <% @users.each do | user | %>
+        <div class="col-md-12 grid-margin" id="user_<%=user.id%>">
+            <div class="card rounded">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div style="width:50px">
+                            <%= image_tag user.try(:avatar),class:"img-xs rounded-circle"%>
+                            </div>
+                            <div class="ml-2">
+                                <p><%= user.nome %></p>
+                                <p class="tx-11 text-muted"><%= user.created_at.strftime("%d/%m/%Y %h:%m")%></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3 tx-14 text-break"><%= user.email %>.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="row"style="float:right">
+                        <div class="d-flex post-actions">
+                            <%= link_to visualizar_path(user_id: user.id), style:"margin-right:10px"  do %>
+                                <p class="btn btn-secundary">Visualizar perfil</p>
+                            <% end %>
+                            <%= link_to seguir_path(seguidor: current_user.id,seguido: user.id)do %>
+                                <% if @seguidor.where(seguidor:current_user.id,seguido: user.id).size != 0 %>
+                                    <p class="btn btn-info">Deixar de Seguir</p>
+                                <% else %>
+                                    <p class="btn btn-primary">seguir</p>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
