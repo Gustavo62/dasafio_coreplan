@@ -1,0 +1,25 @@
+<% @seguidores.each do | seguido | %>
+    <div class="col-md-12 grid-margin">
+        <div class="card rounded">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div style="width:50px">
+                        <%= image_tag @users.find(seguido.seguidor).try(:avatar),class:"img-xs rounded-circle"%>
+                        </div>
+                        <div class="ml-2" style="padding-top: 16px;padding-left: 9px;">
+                            <p><%= @users.find(seguido.seguidor).nome %></p>
+                            <p class="tx-11 text-muted">
+                                começou a lhe seguir em <%= seguido.created_at.strftime("%d/%m/%Y às %h:%m")%>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="tx-11 text-muted" style="margin-top: 48px;">
+                        <b style="float:right"><%= link_to 'marcar como visto', visualizar_notificacao_path(id: seguido.id) %></b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

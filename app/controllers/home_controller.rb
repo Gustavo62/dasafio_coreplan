@@ -20,9 +20,21 @@ class HomeController < ApplicationController
     @seguidor = Seguidor.all
   end
   def visualizar
+    @user       = User.find(params[:user_id])
+    @posts      = Post.all.where(user_id: @user.id)
+    @seguidor   = Seguidor.all
   end
   def notificacao
+    @users       = User.all
+    @seguidores  = Seguidor.where(seguido: current_user.id,visualizado: false)
+    @seguidor    = Seguidor.all
   end
+
+  def visualizar_notificacao
+    Seguidor.find(params[:id]).update(visualizado: true)
+    redirect_to notificacao_path
+  end
+
   def dar_like_post
     @liked = LikePost.where(user_id: params[:user_id],post_id: params[:post_id])
     if @liked.size != 0
