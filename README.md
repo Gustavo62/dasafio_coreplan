@@ -1,24 +1,42 @@
-# README
+<h1 align="center">
+    Desafio Coreplan
+</h1>
+<p align="center">Objetivo: Desenvolver uma solução backend para o problema proposto.</p>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<p align="justify">Problema: A aplicação a ser desenvolvida é um microblog, assim como o twitter.
 
-Things you may want to cover:
+* O usuário deve poder
+    * Realizar o login(email/senha)
+    * Realizar o logout
 
-* Ruby version
+* O usuário logado deve poder
+    * Criar postagens
+    * Ver as postagens criadas
+    * Buscar por outros usuários
+    * Visualizar o perfil de outros usuários com suas postagens
+    * Seguir outro usuário
+    * Receber notificação ao ser seguido por um usuário.</p>
 
-* System dependencies
+<h4 align="center"> 
+	🚀 SOLUÇÃO PARA O DESAFIO 🚀
+</h4>
 
-* Configuration
+### REQUISITOS ENTREGUES
 
-* Database creation
+- [x] Login usuário.
+- [x] Logout usuário.
+- [x] Criar post.
+- [x] Visualizar posts.
+- [x] Visualizar usuário.
+- [x] Seguir usuários.
+- [x] Notificação de novos seguidores.
+- [ ] Testes unitários e de aceitação.
 
-* Database initialization
+### REQUISITOS ENTREGUES PLUS ✨
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [x] Curtir posts.
+- [x] Frontend apresentável.
+- [x] Aplicação no heroku.
+- [x] Frontend apresentável.
+- [x] Boas mensagens de commit. 
+- [ ] 100% de cobertura nos testes.
