@@ -41,5 +41,5 @@
 - [x] Boas mensagens de commit. 
 - [ ] 100% de cobertura nos testes.
 
-<p align="center"><a href="https://coremedia.herokuapp.com/users/sign_in">Acessar CoreMedia ⚡</a></p>
+<p align="center"><a href="https://coremedia.herokuapp.com/users/sign_in" target="blank" >Acessar CoreMedia ⚡</a></p>
 
