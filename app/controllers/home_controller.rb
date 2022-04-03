@@ -2,14 +2,14 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
   layout 'user'
   def index
-    @posts      = Post.all.order(:create_at)
+    @posts      = Post.all.order(:created_at)
     @users      = User.all
     @LikePost   = LikePost.all
     @seguidor   = Seguidor.all
   end
 
   def curtidas
-    @postsLikeds = Post.all.where(id: LikePost.all.where(user_id: current_user.id).order(:create_at).pluck(:post_id))
+    @postsLikeds = Post.all.where(id: LikePost.all.where(user_id: current_user.id).order(:created_at).pluck(:post_id))
     @users       = User.all
     @LikePost    = LikePost.all
     @seguidor    = Seguidor.all
