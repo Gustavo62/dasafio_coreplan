@@ -7,7 +7,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
                             <div style="width:50px">
-                            <%= image_pack_tag @users.find(post.user_id).try(:avatar),class:"img-xs rounded-circle"%>
+                            <%= image_tag @users.find(post.user_id).try(:avatar),class:"img-xs rounded-circle"%>
                             </div>
                             <div class="ml-2">
                                 <p><%= @users.find(post.user_id).try(:nome) %></p>
