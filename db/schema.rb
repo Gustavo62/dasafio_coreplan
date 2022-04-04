@@ -40,26 +40,6 @@ ActiveRecord::Schema.define(version: 2022_04_02_205602) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "coments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
-    t.string "coment_msg", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_coments_on_post_id"
-    t.index ["user_id"], name: "index_coments_on_user_id"
-  end
-
-  create_table "like_coments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "coment_id", null: false
-    t.boolean "like"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["coment_id"], name: "index_like_coments_on_coment_id"
-    t.index ["user_id"], name: "index_like_coments_on_user_id"
-  end
-
   create_table "like_posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -103,10 +83,6 @@ ActiveRecord::Schema.define(version: 2022_04_02_205602) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "coments", "posts"
-  add_foreign_key "coments", "users"
-  add_foreign_key "like_coments", "coments"
-  add_foreign_key "like_coments", "users"
   add_foreign_key "like_posts", "posts"
   add_foreign_key "like_posts", "users"
 end

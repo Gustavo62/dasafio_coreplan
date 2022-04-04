@@ -2,6 +2,13 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
+group :development, :test do
+  gem 'rspec'
+end
+
+# Or, run against the main branch
+# (requires main-branch versions of all related RSpec libraries)
+
 # controle de users
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
